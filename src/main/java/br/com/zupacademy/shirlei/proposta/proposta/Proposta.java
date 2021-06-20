@@ -2,10 +2,7 @@ package br.com.zupacademy.shirlei.proposta.proposta;
 
 import org.hibernate.validator.constraints.br.CPF;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -14,6 +11,10 @@ import java.math.BigDecimal;
 
 @Entity
 public class Proposta {
+
+    public enum StatusProposta {
+        ELEGIVEL, NAO_ELEGIVEL
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,6 +42,9 @@ public class Proposta {
     @Positive
     private BigDecimal salario;
 
+    @Enumerated(EnumType.STRING)
+    private StatusProposta status;
+
 
     public Proposta(@CPF @NotNull @NotEmpty String documento, @Email @NotNull @NotEmpty String email,
                     @NotNull @NotEmpty String nome, @NotNull @NotEmpty String endereco,
@@ -53,6 +57,7 @@ public class Proposta {
     }
 
     public Long getId() {
+
         return id;
     }
 
@@ -75,4 +80,29 @@ public class Proposta {
     public BigDecimal getSalario() {
         return salario;
     }
+
+    public void setStatus(StatusProposta status){
+        this.status = status;
+    }
+
+    @Override
+    public String toString(){
+        return "Proposta{" +
+                "id=" + id +
+                ", documento='" + documento + '\'' +
+                ", email='" + email + '\'' +
+                ", nome='" + nome + '\'' +
+                ", endereco='" + endereco + '\'' +
+                ", salario=" + salario +
+                ", status=" + status +
+                '}';
+    }
+
+//    public enum StatusProposta {
+//        SEM_RESTRICAO, COM_RESTRICAO;
+//
+//        public Proposta.StatusProposta toStatusProposta(){
+//            return this.equals(SEM_RESTRICAO)?Proposta.StatusProposta.ELEGIVEL: Proposta.StatusProposta.NAO_ELEGIVEL;
+//        }
+//    }
 }

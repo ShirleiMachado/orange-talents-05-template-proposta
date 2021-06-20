@@ -48,11 +48,6 @@ public class PropostaDTO {
     }
 
     public Proposta toModel() {
-        return new Proposta(documento,email,nome,endereco,salario);
-    }
-
-
-    public Proposta converter() {
             return new Proposta(this.documento, this.email, this.nome, this.endereco, this.salario);
         }
 
