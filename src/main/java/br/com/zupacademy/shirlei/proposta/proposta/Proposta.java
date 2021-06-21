@@ -1,5 +1,6 @@
 package br.com.zupacademy.shirlei.proposta.proposta;
 
+import br.com.zupacademy.shirlei.proposta.Validacao.CpfCnpj;
 import org.hibernate.validator.constraints.br.CPF;
 
 import javax.persistence.*;
@@ -20,7 +21,7 @@ public class Proposta {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @CPF
+    @CpfCnpj
     @NotNull
     @NotEmpty
     private String documento;
@@ -45,8 +46,10 @@ public class Proposta {
     @Enumerated(EnumType.STRING)
     private StatusProposta status;
 
+    @Deprecated
+    public Proposta(){}
 
-    public Proposta(@CPF @NotNull @NotEmpty String documento, @Email @NotNull @NotEmpty String email,
+    public Proposta(@CpfCnpj @NotNull @NotEmpty String documento, @Email @NotNull @NotEmpty String email,
                     @NotNull @NotEmpty String nome, @NotNull @NotEmpty String endereco,
                     @NotNull @Positive BigDecimal salario){
                         this.documento = documento;
@@ -97,12 +100,4 @@ public class Proposta {
                 ", status=" + status +
                 '}';
     }
-
-//    public enum StatusProposta {
-//        SEM_RESTRICAO, COM_RESTRICAO;
-//
-//        public Proposta.StatusProposta toStatusProposta(){
-//            return this.equals(SEM_RESTRICAO)?Proposta.StatusProposta.ELEGIVEL: Proposta.StatusProposta.NAO_ELEGIVEL;
-//        }
-//    }
 }

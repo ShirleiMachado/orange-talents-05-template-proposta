@@ -15,6 +15,7 @@
 	<description>Implementando o desafio de Proposta</description>
 	<properties>
 		<java.version>11</java.version>
+		<spring-cloud.version>Hoxton.SR11</spring-cloud.version>
 	</properties>
 	<dependencies>
 		<dependency>

@@ -10,20 +10,18 @@ import javax.validation.Payload;
 import javax.validation.ReportAsSingleViolation;
 import java.lang.annotation.*;
 
-@CPF
-@CNPJ
+
 @Documented
 @ConstraintComposition(CompositionType.OR)
+@CPF
+@CNPJ
 @ReportAsSingleViolation
 @Constraint(validatedBy = {})
-@Target({ElementType.FIELD})
+@Target({ElementType.FIELD, ElementType.PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface CpfCnpj {
 
     String message() default "Este CPF/CNPJ é inválido";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default { };
-    String fieldName();
-    Class<?> domainClass();
-
 }

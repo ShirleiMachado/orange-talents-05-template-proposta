@@ -71,8 +71,8 @@ public class PropostaController {
                 String resultadoSolicitacao = Arrays.stream(e.getMessage().split(","))
                         .filter(m -> m.startsWith("\"resultadoSolicitacao\""))
                         .reduce("", (p, m) -> {
-                            int startIndex = m.indexOf(":") + 2; // tira as aspas
-                            int endIndex = m.length() - 1; // tira as aspas
+                            int startIndex = m.indexOf(":") + 2;
+                            int endIndex = m.length() - 1;
                             return m.substring(startIndex, endIndex);
                         });
                 StatusAnalise status = StatusAnalise.valueOf(resultadoSolicitacao);

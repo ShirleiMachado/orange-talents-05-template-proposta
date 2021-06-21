@@ -1,11 +1,15 @@
 package br.com.zupacademy.shirlei.proposta.analiseProposta;
 
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.PostMapping;
 
-@FeignClient(url = "${proposta.services.analise.host}", name = "analise")
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+@FeignClient(url = "http://localhost:9999", name = "analise")
 public interface AnaliseClient {
 
-    @PostMapping("\"${proposta.services.analise.solicitacao}\"")
+    @RequestMapping(value = "/api/solicitacao", method = RequestMethod.POST, consumes = "application/json")
     AnaliseResponse verificaStatusSolicitante(AnaliseRequest pedidoAvaliacao);
 }
+
+
