@@ -62,22 +62,7 @@ public class PropostaController {
     private void salvaProposta(Proposta proposta) {
         propostaRepository.save(proposta);
     }
-    private void atualizaStatusDaProposta(AnaliseRequest pedidoAvaliacao, Proposta proposta) {
-        try {
-            AnaliseResponse resultadoAvaliacao = client.verificaStatusSolicitante(pedidoAvaliacao);
-            proposta.setStatus(resultadoAvaliacao.getResultadoSolicitacao());
-        } catch (FeignException e) {
-            if (e.status() == HttpStatus.UNPROCESSABLE_ENTITY.value()) {
-                String resultadoSolicitacao = Arrays.stream(e.getMessage().split(","))
-                        .filter(m -> m.startsWith("\"resultadoSolicitacao\""))
-                        .reduce("", (p, m) -> {
-                            int startIndex = m.indexOf(":") + 2;
-                            int endIndex = m.length() - 1;
-                            return m.substring(startIndex, endIndex);
-                        });
-                StatusAnalise status = StatusAnalise.valueOf(resultadoSolicitacao);
-                proposta.setStatus(status.toStatusProposta());
-            }
-        }
-    }
+    private void atualizaStatusDaProposta(AnaliseRequest pedidoAvaliacao, Proposta proposta) {}
 }
+
+
