@@ -62,7 +62,7 @@ public class PropostaController {
     private void salvaProposta(Proposta proposta) {
         propostaRepository.save(proposta);
     }
-    private void atualizaStatusDaProposta(AnaliseRequest pedidoAvaliacao, Proposta proposta) {}
+    private void atualizaStatusDaProposta(AnaliseRequest pedidoAvaliacao, Proposta proposta){}
 }
 
 
